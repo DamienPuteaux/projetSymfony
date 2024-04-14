@@ -1,5 +1,5 @@
 Si l'on se rend sur le projet hébergé sur le WEB : 
-  sur la page Index\ : cliquez sur public\ pour accéder à la page de connexion
+  sur la page Index of/ : cliquez sur public/ pour accéder à la page de connexion
 
 Identifiants de chaque employé pour pouvoir se connecter : 
 Clément Bastien (Employé)
