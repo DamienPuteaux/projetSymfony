@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les inscriptions{% endblock %}
+
+{% block body %}
+    <h1>Gérer les inscriptions</h1>
+
+    {% if inscriptions is empty %}
+        <p>Aucune inscription en attente.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Produit</th>
+                    <th style="width: 15%;">Date début</th>
+                    <th style="width: 10%;">Durée</th>
+                    <th style="width: 15%;">Département</th>
+                    <th style="width: 15%;">Employé</th>
+                    <th style="width: 10%;">Statut</th>
+                    <th style="width: 15%;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscription in inscriptions %}
+                    <tr>
+                        <td>{{ inscription.formation.leproduit.libelle|default('N/A') }}</td>
+                        <td>{{ inscription.formation.dateDebut|date('Y-m-d') }}</td>
+                        <td>{{ inscription.formation.nbreHeures ~ ' heures' }}</td>
+                        <td>{{ inscription.formation.departement }}</td>
+                        <td>{{ inscription.employe.prenom }} {{ inscription.employe.nom }}</td>
+                        <td>{{ inscription.statut }}</td>
+                        <td>
+                            <form action="{{ path('app_gerer_inscriptions') }}" method="post">
+                                <input type="hidden" name="inscription_id" value="{{ inscription.id }}">
+                                <select name="action" class="form-select">
+                                    <option value="accepter">Accepter</option>
+                                    <option value="refuser">Refuser</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

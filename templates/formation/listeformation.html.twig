@@ -1,0 +1,40 @@
+<div class="formations">
+    <h1>Bienvenue, {{ app.session.get('prenomEmploye') }} {{ app.session.get('nomEmploye') }}</h1>
+    <p>Vous êtes : {{ app.session.get('roleEmploye') }}</p>
+
+    <p>Voici la liste des formations auxquelles vous pouvez vous inscrire :</p>
+
+    {% if formations is empty %}
+        <p>Aucune formation à venir pour le moment.</p>
+    {% else %}
+        {% for formation in formations %}
+            <div class="formation">
+                <p>
+                    Produit : {{ formation.leproduit.libelle|default('N/A') }}<br>
+                    Date début : {{ formation.dateDebut|date('Y-m-d')|default('N/A') }}<br>
+                    Durée : {{ formation.nbreHeures ~ ' heures' |default('N/A') }}<br>
+                    Département : {{ formation.departement|default('N/A') }}<br>
+
+                    <a href="{{ path('app_inscrire', {'id': formation.id}) }}" class="inscription-button">S'inscrire</a>
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+    {% for message in app.flashes('success') %}
+        <div id="flash-message" class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <a href="{{ path('app_deconnexion') }}" class="btn btn-danger">Se déconnecter</a>
+
+    <a href="{{ path('app_mes_formations') }}" class="btn btn-primary">Mes Formations</a>
+</div>
+
+<script>
+    setTimeout(function() {
+        document.getElementById('flash-message').style.display = 'none';
+    }, 5000);
+</script>

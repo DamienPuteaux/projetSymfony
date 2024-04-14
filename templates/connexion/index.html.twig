@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <h2>Connexion</h2>
+
+    {% if message is not empty %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+    {{ form_start(form) }}
+    {{ form_row(form.login) }}
+    {{ form_row(form.mdp) }}
+    {{ form_end(form) }}
+{% endblock %}

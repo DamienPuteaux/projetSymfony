@@ -1,0 +1,19 @@
+{# templates/recherche/rechercheNomPrenom.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche par Nom et Prénom{% endblock %}
+
+{% block body %}
+    <h1>Recherche par Nom et Prénom</h1>
+    
+    {% if employe is not empty %}
+        <ul>
+            {% for employe in employe %}
+                <li>{{ employe }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune inscription trouvée.</p>
+    {% endif %}
+{% endblock %}

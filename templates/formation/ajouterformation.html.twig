@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Formulaire d'ajout/modification d'une formation</h1>
+
+    {{ form_start(form) }}
+    
+    {{ form_row(form.dateDebut, {'label': 'Date de la formation :'}) }}
+    {{ form_row(form.nbreHeures, {'label': 'Nombre d\'heures :'}) }}
+    {{ form_row(form.departement, {'label': 'Département :'}) }}
+    {{ form_row(form.leproduit, {'label': 'Produit lié :'}) }}
+    
+    <button type="submit">Enregistrer</button>
+
+    {{ form_end(form) }}
+{% endblock %}

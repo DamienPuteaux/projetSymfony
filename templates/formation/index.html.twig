@@ -1,0 +1,46 @@
+<div class="formations">
+    <h1>Bienvenue, {{ app.session.get('prenomEmploye') }} {{ app.session.get('nomEmploye') }}</h1>
+    <p>Vous êtes : {{ app.session.get('roleEmploye') }}</p>
+
+    <p>Voici la liste des formations disponibles :</p>
+
+    {% if formations is empty %}
+        <p>Aucune formation n'a été ajoutée pour le moment.</p>
+    {% else %}
+        {% for formation in formations %}
+            <div class="formation">
+                <p>
+                    Produit : {{ formation.leproduit.libelle|default('N/A') }}<br>
+                    Date début : {{ formation.dateDebut|date('Y-m-d')|default('N/A') }}<br>
+                    Durée : {{ formation.nbreHeures ~ ' heures' |default('N/A') }}<br>
+                    Département : {{ formation.departement|default('N/A') }}<br>
+
+                    <a href="{{ path('app_formation_modifier', {'id': formation.id}) }}" class="modifier-button">Modifier</a>
+                    <a href="{{ path('app_formation_supprimer', {'id': formation.id}) }}" class="supprimer-button">Supprimer</a>
+                </p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <a href="{{ path('app_deconnexion') }}" class="btn btn-danger">Se déconnecter</a>
+    <a href="{{ path('app_formation_ajouter') }}" class="btn btn-danger">Ajouter une formation</a>
+    <a href="{{ path('app_gerer_inscriptions') }}" class="btn btn-danger">Gestion des inscriptions</a>
+</div>
+
+<script>
+    setTimeout(function() {
+        var flashMessages = document.querySelectorAll('.alert');
+        flashMessages.forEach(function(flashMessage) {
+            flashMessage.style.display = 'none';
+        });
+    }, 5000);
+</script>
